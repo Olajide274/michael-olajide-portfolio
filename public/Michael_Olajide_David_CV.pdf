@@ -1,0 +1,57 @@
+
+
+MICHAEL OLAJIDE DAVID
+BACKEND-FOCUSED FULL-STACK ENGINEER | GO • C#/.NET • PAYMENTS
+Kaduna, Nigeria • +234 816 521 2254 • michaelolajidedavid@gmail.com
+www.linkedin.com/in/michael-olajide-david-b27859383 • github.com/Olajide274 • swift-portfolio-rho.vercel.app
+PROFESSIONAL SUMMARY
+Backend-focused full-stack engineer (Go, gRPC, C#/.NET) building production web systems since 2022. Architected a Go/gRPC
+payment escrow platform with Paystack signature-verified webhooks and a tamper-evident audit log, and delivered
+multi-currency Stripe and Paystack checkout at 1860 Travels Limited. Own systems end to end, from schema and API design to
+security and UI. Founder of Swift Digital Services. First-Class Physics with Electronics graduate (CGPA 4.50/5.00).
+TECHNICAL SKILLS & COMPETENCIES
+Backend & APIs: Go, gRPC, C# / .NET (ASP.NET Core), Node.js, REST APIs, OpenAPI/Swagger, GraphQL, Prisma ORM
+Frontend: Next.js (14/15), React, TypeScript, Tailwind CSS, HTML5, CSS3, Responsive Design, Accessibility (WCAG 2.1)
+Data & Infra: PostgreSQL, Redis, Supabase (Realtime, Auth), SQL, Docker, Docker Compose, Vercel, GitHub Codespaces
+Architecture & Payments: Stripe, Paystack, Escrow & Dispute Workflows, Audit Logging, API design, database schema design
+Security & Reliability: JWT Auth, OAuth2, Webhook Verification, CORS, Concurrency & Race-Condition Testing, Logging
+Practices & Tooling: Git, GitHub Actions, CI/CD, Agile Sprints, Unit Testing (Go, .NET), Jest, Redux, Context API, Python (scripting)
+TECHNICAL PROJECTS
+Trade Escrow Protocol — Payment Escrow PlatformJun 2026 – Present
+Independent project — Go, gRPC, PostgreSQL, Redis, Docker, Next.js, React, Tailwind CSS
+•Architected a Go/gRPC escrow backend (Gin, pgx, PostgreSQL, Redis, JWT) on Docker Compose, with endpoints for accounts,
+escrows, deposits and disputes.
+•Integrated Paystack deposits with signature-verified webhooks, and built a dispute/refund workflow plus a hash-chained
+audit log that makes tampering with transaction records detectable.
+•Hardened the API with origin-allowlisted CORS, security headers and request-size limits, and removed a hardcoded secret
+from the OTP signing code.
+•Built a Next.js/React/Tailwind frontend covering every endpoint, and wrote unit and concurrency tests that exposed and
+eliminated race conditions in simultaneous transactions.
+IoT Weather Telemetry System — Final Year ProjectMar 2026 – Jun 2026
+Next.js, Tailwind CSS, Supabase, Python
+•Built a Python pipeline and a Next.js/Tailwind dashboard on Supabase Realtime WebSockets that handled 10,000+ readings
+per day with about 40% lower latency than the polling version I started with. Presented at the AFIT Research Symposium
+(June 2026).
+PROFESSIONAL EXPERIENCE
+Full-Stack Web Developer | 1860 Travels LimitedJanuary 2026 – August 2026
+•Delivered multi-currency Stripe and Paystack checkout in Node.js, automating receipts and simplifying booking payments,
+and fixed defects in the C#/.NET booking backend.
+•Migrated 449 legacy URLs during a platform migration using C# 301 redirects, so 100% of existing booking links kept working
+and 404 errors were eliminated.
+•Raised mobile PageSpeed by 53% (32 to 49) by reworking responsive layouts, and deployed automated metadata templates
+across 2,000+ pages to support organic search.
+•Wrote Jest unit tests for the frontend within Agile sprints, and rewrote query logic to find and fix 556 tour packages with
+missing prices.
+•Ran A/B tests on landing-page variants that lifted conversion by 12%.
+Founder & Full-Stack Developer | Swift Digital Services2022 – Present
+•Design, build and deploy client websites end to end (Next.js, React, Tailwind CSS, ASP.NET Core, PostgreSQL), from scoping
+and data modeling to production on Vercel.
+•Shipped a live artist site for Chris Mitchell Jazz (chrismitchelljazz.com.ng) on a custom domain, integrating his merch
+storefront.
+•Architect and maintain my own products, including the Go/gRPC Trade Escrow platform.
+EDUCATION
+Air Force Institute of Technology (AFIT) — Kaduna, NigeriaMarch 2022 – June 2026
+Bachelor of Science (B.Sc. Hons) in Physics with Electronics • First-Class Honours (Final CGPA: 4.50 / 5.00) • Top 2% of the
+graduating technical cohort • NYSC: scheduled for 2027
+VOLUNTEER EXPERIENCE
+•Volunteer Tutor: tutored and mentored 50+ high-school students in physics and computing (June 2023 – September 2025).
