@@ -10,11 +10,9 @@ type DesignCategory = 'Web Banners' | 'Mobile & Social' | 'Destination Flyers' |
 type DesignItem = { src: string; title: string; category: DesignCategory; caption: string; alt: string }
 
 const galleryItems: DesignItem[] = [
-  { src: '/design/homepage_banner.jpeg', title: 'Commonwealth Games 2026', category: 'Web Banners', caption: 'Commonwealth Games travel package homepage banner.', alt: 'Commonwealth Games 2026 travel package banner with athletes and event branding' },
   { src: '/design/desktop.jpg', title: 'BIG 7 Summer Edition — desktop', category: 'Web Banners', caption: 'Desktop campaign banner introducing seven summer destinations.', alt: 'Wide BIG 7 Summer Edition travel campaign banner showing seven destinations and booking details' },
   { src: '/design/mobile.png', title: 'BIG 7 Summer Edition — mobile', category: 'Mobile & Social', caption: 'Mobile campaign layout for the BIG 7 destination package.', alt: 'Vertical BIG 7 travel campaign creative listing seven destinations' },
   { src: '/design/Zanzibar.jpg', title: 'Zanzibar', category: 'Destination Flyers', caption: 'BIG 7 destination flyer — Zanzibar.', alt: 'Zanzibar beach and sailing dhow destination flyer' },
-  { src: '/design/zanzibar.jpeg', title: 'Zanzibar — campaign variant', category: 'Destination Flyers', caption: 'Alternate Zanzibar campaign creative.', alt: 'Zanzibar tropical beach campaign artwork' },
   { src: '/design/Nairobi.jpg', title: 'Nairobi', category: 'Destination Flyers', caption: 'BIG 7 destination flyer — Nairobi.', alt: 'Nairobi destination flyer featuring a giraffe at sunset' },
   { src: '/design/doha.jpg', title: 'Doha', category: 'Destination Flyers', caption: 'BIG 7 destination flyer — Doha.', alt: 'Doha skyline and waterfront destination flyer' },
   { src: '/design/instanbul.jpg', title: 'Istanbul', category: 'Destination Flyers', caption: 'BIG 7 destination flyer — Istanbul.', alt: 'Istanbul Hagia Sophia and waterfront destination flyer' },
@@ -32,6 +30,7 @@ const galleryItems: DesignItem[] = [
 ]
 
 const categories = ['All', 'Web Banners', 'Mobile & Social', 'Destination Flyers', 'Event Promos'] as const
+const featuredArtworkSources = new Set(['/design/desktop.jpg', '/design/flier1.jpg', '/design/flier2.jpg', '/design/flier3.jpg', '/design/1794855002442_image.png'])
 const designSkills = ['Layout & Composition', 'Typography', 'Branding', 'Campaign Design', 'Social Media Creatives', 'Print & Digital Export', 'Adobe Creative Suite', 'Figma (UI/UX)', 'Canva']
 
 function Lightbox({ item, onClose, onPrevious, onNext }: { item: DesignItem; onClose: () => void; onPrevious: () => void; onNext: () => void }) {
@@ -57,10 +56,23 @@ function Lightbox({ item, onClose, onPrevious, onNext }: { item: DesignItem; onC
 export function DesignGallery({ fullPage = false }: { fullPage?: boolean }) {
   const [activeCategory, setActiveCategory] = useState<(typeof categories)[number]>('All')
   const [activeIndex, setActiveIndex] = useState<number | null>(null)
-  const items = useMemo(() => activeCategory === 'All' ? galleryItems : galleryItems.filter((item) => item.category === activeCategory), [activeCategory])
+  const categoryItems = useMemo(() => activeCategory === 'All' ? galleryItems : galleryItems.filter((item) => item.category === activeCategory), [activeCategory])
+  const visibleItems = useMemo(() => categoryItems.filter((item) => !featuredArtworkSources.has(item.src)), [categoryItems])
   const close = useCallback(() => setActiveIndex(null), [])
-  const previous = useCallback(() => setActiveIndex((value) => value === null ? null : (value - 1 + items.length) % items.length), [items.length])
-  const next = useCallback(() => setActiveIndex((value) => value === null ? null : (value + 1) % items.length), [items.length])
+  const previous = useCallback(() => setActiveIndex((value) => {
+    if (value === null) return null
+    const currentPosition = categoryItems.findIndex((item) => galleryItems.indexOf(item) === value)
+    if (currentPosition === -1) return value
+    const previousItem = categoryItems[(currentPosition - 1 + categoryItems.length) % categoryItems.length]
+    return galleryItems.indexOf(previousItem)
+  }), [categoryItems])
+  const next = useCallback(() => setActiveIndex((value) => {
+    if (value === null) return null
+    const currentPosition = categoryItems.findIndex((item) => galleryItems.indexOf(item) === value)
+    if (currentPosition === -1) return value
+    const nextItem = categoryItems[(currentPosition + 1) % categoryItems.length]
+    return galleryItems.indexOf(nextItem)
+  }), [categoryItems])
 
   return <main className={`design-page ${fullPage ? 'design-page-full' : 'design-home-section'}`}>
     {fullPage && <header className="design-page-header"><Link href="/#top" className="design-back"><ArrowLeft size={15} /> Back to engineering portfolio</Link><Link href="/#contact" className="design-contact-link">Contact <ArrowUpRight size={14} /></Link></header>}
@@ -75,9 +87,9 @@ export function DesignGallery({ fullPage = false }: { fullPage?: boolean }) {
         <motion.article className="design-case" initial={false} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: .12 }} transition={{ duration: .45, delay: .08 }}><span className="design-overline">Event promo / 3 formats</span><h3>Notting Hill Carnival 2026 promo</h3><p>Wide, square and vertical promotional formats for the 2026 event.</p><div className="design-case-thumbs">{['/design/flier3.jpg', '/design/flier2.jpg', '/design/flier1.jpg'].map((src, i) => <button key={src} onClick={() => setActiveIndex(galleryItems.findIndex((item) => item.src === src))} aria-label={`Open Notting Hill Carnival ${['wide', 'square', 'vertical'][i]} design`}><Image src={src} alt={`Notting Hill Carnival 2026 ${['wide', 'square', 'vertical'][i]} design`} fill sizes="(max-width: 700px) 28vw, 180px" /></button>)}</div></motion.article>
         <motion.article className="design-case" initial={false} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: .12 }} transition={{ duration: .45, delay: .16 }}><span className="design-overline">Travel event / 2026</span><h3>Commonwealth Games 2026 promo</h3><p>Travel package campaign creative for the Commonwealth Games in Glasgow.</p><button className="design-commonwealth-thumb" onClick={() => setActiveIndex(galleryItems.findIndex((item) => item.src === '/design/1794855002442_image.png'))} aria-label="Open Commonwealth Games 2026 design"><Image src="/design/1794855002442_image.png" alt="Commonwealth Games 2026 travel package promotional banner" fill sizes="(max-width: 700px) 100vw, 55vw" /></button></motion.article>
       </div>
-      <div className="design-gallery-heading"><div><span className="design-overline">Selected assets</span><h3>Campaign gallery</h3></div><span>{items.length} pieces</span></div>
+      <div className="design-gallery-heading"><div><span className="design-overline">Selected assets</span><h3>Campaign gallery</h3></div><span>{visibleItems.length} pieces</span></div>
       <div className="design-filters" role="group" aria-label="Filter design gallery">{categories.map((category) => <button key={category} className={activeCategory === category ? 'active' : ''} onClick={() => setActiveCategory(category)} aria-pressed={activeCategory === category}>{category}</button>)}</div>
-      <div className="design-gallery-grid">{items.map((item, index) => <motion.button key={item.src} className={`design-gallery-item design-gallery-item-${index % 5}`} onClick={() => setActiveIndex(galleryItems.indexOf(item))} aria-label={`View ${item.title}`} initial={false} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: .08 }} transition={{ duration: .4, delay: Math.min(index % 4, 3) * .04 }}><span className="design-gallery-image"><Image src={item.src} alt={item.alt} fill sizes="(max-width: 700px) 50vw, (max-width: 1100px) 33vw, 25vw" loading="lazy" /></span><span className="design-gallery-caption"><strong>{item.title}</strong><span>{item.category}</span></span></motion.button>)}</div>
+      <div className="design-gallery-grid">{visibleItems.map((item, index) => <motion.button key={item.src} className={`design-gallery-item design-gallery-item-${index % 5}`} onClick={() => setActiveIndex(galleryItems.indexOf(item))} aria-label={`View ${item.title}`} initial={false} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: .08 }} transition={{ duration: .4, delay: Math.min(index % 4, 3) * .04 }}><span className="design-gallery-image"><Image src={item.src} alt={item.alt} fill sizes="(max-width: 700px) 50vw, (max-width: 1100px) 33vw, 25vw" loading="lazy" /></span><span className="design-gallery-caption"><strong>{item.title}</strong><span>{item.category}</span></span></motion.button>)}</div>
       <div className="design-cta"><div><span className="design-overline">Let&apos;s make it clear</span><h3>Need a design for your brand?</h3></div><div><a className="button button-primary" href="https://wa.me/2348165212254" target="_blank" rel="noreferrer">WhatsApp <ArrowUpRight size={14} /></a><a className="button" href="mailto:michaelolajidedavid@gmail.com">Email <ArrowUpRight size={14} /></a></div></div>
     </section>
     <AnimatePresence>{activeIndex !== null && <Lightbox item={galleryItems[activeIndex]} onClose={close} onPrevious={previous} onNext={next} />}</AnimatePresence>
