@@ -51,7 +51,7 @@ flowchart LR
 | Section | What you'll find |
 | --- | --- |
 | **Featured systems** | Trade Escrow Protocol, WayTrust, CheckAm, Nexus Recon Engine, 1860 Travels ERP case study |
-| **Live projects** | KadunaHomes, Xtreme Hotel demo, Chris Mitchell Jazz, BTC Essential |
+| **Live projects** | KadunaHomes, Villa Engracia Suites, Chris Mitchell Jazz, BTC Essential |
 | **Skills** | Grouped by what they're for (backend, data, payments, security, DevOps, frontend) |
 | **Experience** | 1860 Travels Limited, Swift Digital Services |
 | **Case studies** | One page per project at `/projects/[slug]`, with problem, architecture, what I built and the stack |
