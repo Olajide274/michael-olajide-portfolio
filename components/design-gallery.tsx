@@ -32,7 +32,7 @@ const galleryItems: DesignItem[] = [
 ]
 
 const categories = ['All', 'Web Banners', 'Mobile & Social', 'Destination Flyers', 'Event Promos'] as const
-const designSkills = ['Layout & Composition', 'Typography', 'Branding', 'Campaign Design', 'Social Media Creatives', 'Print & Digital Export']
+const designSkills = ['Layout & Composition', 'Typography', 'Branding', 'Campaign Design', 'Social Media Creatives', 'Print & Digital Export', 'Adobe Creative Suite', 'Figma (UI/UX)', 'Canva']
 
 function Lightbox({ item, onClose, onPrevious, onNext }: { item: DesignItem; onClose: () => void; onPrevious: () => void; onNext: () => void }) {
   useEffect(() => {
@@ -69,7 +69,7 @@ export function DesignGallery({ fullPage = false }: { fullPage?: boolean }) {
       <div className="design-skills" aria-label="Graphic design skills">{designSkills.map((skill) => <span className="chip" key={skill}>{skill}</span>)}</div>
       <div className="design-cases">
         <motion.article className="design-case design-case-featured" initial={false} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: .12 }} transition={{ duration: .45 }}>
-          <div className="design-case-copy"><span className="design-overline">Campaign system / 2026</span><h3>1860 Travels – BIG 7 Summer Edition 2026</h3><p>A 7-destination summer campaign system (Zanzibar, Nairobi, Doha, Istanbul, Marrakech, Rome, London) delivered as web banners, mobile cards and destination flyers with a consistent navy-and-gold identity.</p><p className="design-role"><strong>Role</strong><span>Layout, typography, campaign system, multi-format export</span></p><p className="design-role"><strong>Tools:</strong><span>[Add tools]</span></p></div>
+          <div className="design-case-copy"><span className="design-overline">Campaign system / 2026</span><h3>1860 Travels – BIG 7 Summer Edition 2026</h3><p>A 7-destination summer campaign system (Zanzibar, Nairobi, Doha, Istanbul, Marrakech, Rome, London) delivered as web banners, mobile cards and destination flyers with a consistent navy-and-gold identity.</p><p className="design-role"><strong>Role</strong><span>Layout, typography, campaign system, multi-format export</span></p><p className="design-role"><strong>Tools</strong><span>Adobe Creative Suite, Figma for UI/UX, Canva</span></p></div>
           <button className="design-case-image" onClick={() => { const index = galleryItems.findIndex((item) => item.src === '/design/desktop.jpg'); setActiveIndex(index) }} aria-label="Open BIG 7 campaign banner"><Image src="/design/desktop.jpg" alt="BIG 7 Summer Edition campaign banner showing seven destinations" fill sizes="(max-width: 700px) 100vw, 50vw" priority /></button>
         </motion.article>
         <motion.article className="design-case" initial={false} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: .12 }} transition={{ duration: .45, delay: .08 }}><span className="design-overline">Event promo / 3 formats</span><h3>Notting Hill Carnival 2026 promo</h3><p>Wide, square and vertical promotional formats for the 2026 event.</p><div className="design-case-thumbs">{['/design/flier3.jpg', '/design/flier2.jpg', '/design/flier1.jpg'].map((src, i) => <button key={src} onClick={() => setActiveIndex(galleryItems.findIndex((item) => item.src === src))} aria-label={`Open Notting Hill Carnival ${['wide', 'square', 'vertical'][i]} design`}><Image src={src} alt={`Notting Hill Carnival 2026 ${['wide', 'square', 'vertical'][i]} design`} fill sizes="(max-width: 700px) 28vw, 180px" /></button>)}</div></motion.article>
